@@ -50,11 +50,5 @@
             "phpunit",
             "phpcs"
         ]
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/kevinkiss/Gettext"
-        }
-    ]
+    }
 }

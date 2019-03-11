@@ -35,7 +35,8 @@ class Xliff extends Generator implements GeneratorInterface
 
         foreach ($translations as $translation) {
             $unit = $dom->createElement('unit');
-            $unit->setAttribute('id', md5($translation->getContext().$translation->getOriginal()));
+            // $unit->setAttribute('id', md5($translation->getContext().$translation->getOriginal()));
+            $unit->setAttribute('id', $translation->getUnitId());
 
             //Save comments as notes
             $notes = $dom->createElement('notes');

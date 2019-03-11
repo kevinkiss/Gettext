@@ -25,7 +25,15 @@ class Xliff extends Extractor implements ExtractorInterface
                 }
             }
 
-            foreach ($file->unit as $unit) {
+            foreach ($file->unit as $unit) {                
+
+                foreach ($unit->attributes() as $key => $value) {
+                    if ($key=='id') {
+                        $unit_id = ((array)$value[0])[0];
+                        break;
+                    }
+                }
+
                 foreach ($unit->segment as $segment) {
                     $targets = [];
 
@@ -36,6 +44,7 @@ class Xliff extends Extractor implements ExtractorInterface
                     $translation = new Translation(null, (string) $segment->source);
                     $translation->setTranslation(array_shift($targets));
                     $translation->setPluralTranslations($targets);
+                    $translation = $translation->setUnitId($unit_id);
 
                     if (isset($unit->notes)) {
                         foreach ($unit->notes->note as $note) {

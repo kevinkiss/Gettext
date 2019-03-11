@@ -17,6 +17,7 @@ class Translation
     protected $extractedComments = [];
     protected $flags = [];
     protected $disabled = false;
+    protected $unitId;
 
     /**
      * Generates the id of a translation (context + glue + original).
@@ -76,7 +77,8 @@ class Translation
      */
     public function getId()
     {
-        return static::generateId($this->context, $this->original);
+        return $this->unitId;
+        //return static::generateId($this->context, $this->original);
     }
 
     /**
@@ -501,5 +503,30 @@ class Translation
         Merge::mergeFlags($translation, $this, $options);
 
         return $this;
+    }
+
+    
+    /**
+     * Adds a new flag for this translation.
+     *
+     * @param string $flag
+     *
+     * @return self
+     */
+    public function setUnitId($unit_id)
+    {
+        $this->unitId = (string)$unit_id;
+
+        return $this;
+    }
+
+    /**
+     * Returns the id of this translation.
+     *
+     * @return string
+     */
+    public function getUnitId()
+    {
+        return $this->unitId;
     }
 }
